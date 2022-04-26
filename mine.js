@@ -4,8 +4,9 @@ const bignum = require('bignumber.js')
 class Block {
     constructor() {
         // this.hash = '7B55EE99E84B8AA1D03D58AA068D4E02A4C78DD5342A35065F9B6D9C22ADF1A0';
-        this.hash = '9b47a5ce13301445dcb5d081f12787e51947a2a67061b5d8c5595411d04ba7a7';
-        this.nonce = 342342
+        // this.hash = '4dec4facc0a2d9baa77a80262d18d98cc02cbc266c9d36d75e5754b8e406f673';
+        // this.nonce = 342342
+        this.hash = '000000000000000000000b458f618e6444ff7947fb1b917c032d732cefa1c233'
     }
 
     // mineBlock(difficulty) {
@@ -19,21 +20,22 @@ class Block {
     // }
 
     compareHash() {
-        let nonce = 432341
+        let nonce = 0
 
-        while ((bignum(SHA256(nonce).toString()).toString()) !== (bignum(this.hash).toString())){
-            nonce+=1
+        while (bignum("0x"+SHA256(`${nonce}`).toString()).toString() > bignum("0x"+this.hash.toString())){
+
+            nonce++
             console.log("---------")
-            console.log(bignum("0x"+this.hash).toFixed())
-            console.log(bignum("0x"+SHA256(nonce).toString()).toFixed())
-            console.log(this.nonce)
+            console.log("target: " + bignum("0x"+this.hash).toString())
+            console.log("sha(nonce): " + bignum("0x"+SHA256(`${nonce}`).toString()).toString())
+            console.log("nonce: " + nonce)
+
         }
 
-        console.log(nonce)
-        
-
-        // let x = new bignum('0x9b47a5ce13301445dcb5d081f12787e51947a2a67061b5d8c5595411d04ba7a7')
-        // console.log(x)
+        // console.log("---------")
+        // console.log(bignum("0x"+this.hash).toString())
+        // console.log(bignum("0x"+SHA256(nonce).toString()).toString())
+        // console.log(nonce)
     }
 
 }
